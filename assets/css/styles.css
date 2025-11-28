@@ -1,0 +1,387 @@
+/* ================================
+   NERO · Diseño base
+   ================================ */
+
+:root {
+  --nero-bg: #050608;
+  --nero-surface: #101218;
+  --nero-surface-soft: #141720;
+  --nero-border: #292b33;
+  --nero-text: #f5f5f5;
+  --nero-muted: #9b9daf;
+  --nero-accent: #ffffff;
+  --nero-accent-soft: #b7ff4c;
+  --nero-radius-xl: 1.75rem;
+  --nero-radius-lg: 1.25rem;
+  --nero-radius-md: 0.9rem;
+  --nero-shadow-soft: 0 18px 45px rgba(0,0,0,0.7);
+  --nero-focus-outline: #ffffff;
+  --nero-transition-fast: 150ms ease-out;
+  --nero-transition-med: 220ms ease-out;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ================================
+   Body / tipografía / enlaces
+   ================================ */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #151822 0, var(--nero-bg) 55%);
+  color: var(--nero-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--nero-accent-soft);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--nero-accent);
+}
+
+/* Focus visible accesible para teclado */
+:focus-visible {
+  outline: 3px solid var(--nero-focus-outline);
+  outline-offset: 3px;
+}
+
+/* ================================
+   Navbar
+   ================================ */
+
+.navbar {
+  background: rgba(5, 6, 8, 0.95) !important;
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.navbar-brand {
+  letter-spacing: 0.18em;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.navbar-dark .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.navbar-dark .navbar-toggler-icon {
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.7));
+}
+
+.nav-link {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--nero-muted) !important;
+  padding-inline: 0.75rem !important;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--nero-accent) !important;
+}
+
+.nav-link.active {
+  color: var(--nero-accent) !important;
+  position: relative;
+}
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0.35rem;
+  right: 0.35rem;
+  bottom: 0.05rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffffff, var(--nero-accent-soft));
+}
+
+/* ================================
+   Hero NERO
+   ================================ */
+
+.hero-nero {
+  position: relative;
+  min-height: clamp(70vh, 85vh, 92vh);
+  display: flex;
+  align-items: center;
+  color: var(--nero-text);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.08), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(183, 255, 76, 0.1), transparent 60%),
+    var(--nero-bg);
+}
+
+.hero-nero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../img/hero-nero.jpg"); /* <-- pon aquí tu imagen */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.hero-nero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at bottom, rgba(5, 6, 8, 0.8), transparent 55%);
+  pointer-events: none;
+}
+
+.hero-nero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-nero h1 {
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.hero-nero .lead {
+  max-width: 32rem;
+  margin-inline: auto;
+  color: var(--nero-muted);
+}
+
+/* Badge de subtítulo en hero */
+.hero-nero p.small {
+  letter-spacing: 0.22em;
+}
+
+/* ================================
+   Tarjetas de catálogo / destacados
+   ================================ */
+
+.card {
+  border-radius: var(--nero-radius-xl);
+  border-color: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(145deg, var(--nero-surface), var(--nero-surface-soft));
+  box-shadow: 0 14px 25px rgba(0, 0, 0, 0.75);
+  transition: transform var(--nero-transition-med), box-shadow var(--nero-transition-med),
+    border-color var(--nero-transition-fast), background var(--nero-transition-med);
+}
+
+.card-img-top {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Hover sin marear (y respetando prefers-reduced-motion) */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--nero-shadow-soft);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.card-body {
+  padding: 1.1rem 1rem 1.1rem;
+}
+
+.card-body .h6 {
+  font-size: 0.9rem;
+}
+
+.card-body .small {
+  font-size: 0.75rem;
+}
+
+/* ================================
+   Botones
+   ================================ */
+
+.btn {
+  border-radius: 999px;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.btn-outline-light {
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--nero-accent);
+  background: transparent;
+}
+
+.btn-outline-light:hover,
+.btn-outline-light:focus-visible {
+  background: var(--nero-accent);
+  color: #000;
+}
+
+.btn-light {
+  color: #000;
+  border: none;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.btn-light:hover,
+.btn-light:focus-visible {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+/* WhatsApp button */
+.btn-success {
+  border-radius: 0.85rem;
+}
+
+/* ================================
+   Formularios / filtros
+   ================================ */
+
+.form-select,
+.form-control,
+.input-group-text {
+  background-color: #05060a;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--nero-text);
+}
+
+.form-select:focus,
+.form-control:focus {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 0 0 transparent;
+}
+
+.input-group-text {
+  color: var(--nero-muted);
+}
+
+.form-select option {
+  background: var(--nero-bg);
+}
+
+/* ================================
+   Secciones / títulos
+   ================================ */
+
+section {
+  scroll-margin-top: 5rem;
+}
+
+h2.h4,
+h2.h5,
+h5 {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.86rem;
+}
+
+.text-muted {
+  color: var(--nero-muted) !important;
+}
+
+/* ================================
+   Lookbook
+   ================================ */
+
+#lookbook img {
+  transition: transform var(--nero-transition-fast), opacity var(--nero-transition-fast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #lookbook img:hover {
+    transform: translateY(-3px);
+    opacity: 0.95;
+  }
+}
+
+/* ================================
+   Modal producto
+   ================================ */
+
+.modal-content {
+  border-radius: var(--nero-radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: var(--nero-shadow-soft);
+}
+
+#modalImg {
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.05), transparent 60%);
+}
+
+#modalThumbs img {
+  border: 1px solid transparent;
+  transition: border-color var(--nero-transition-fast), transform var(--nero-transition-fast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  #modalThumbs img:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-1px);
+  }
+}
+
+/* ================================
+   Badges / chips
+   ================================ */
+
+.badge.bg-secondary {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-radius: 999px;
+}
+
+.badge.bg-dark {
+  background: #050608 !important;
+}
+
+/* ================================
+   Footer
+   ================================ */
+
+footer {
+  background: rgba(5, 6, 8, 0.98);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* ================================
+   Accesibilidad extra
+   ================================ */
+
+/* Reducir animaciones si el usuario lo pide */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scrollbar (solo visual, no crítico) */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050608;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2b2d33;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3d47;
+  }
+}
